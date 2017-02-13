@@ -3,7 +3,7 @@ unit BCEditor.Editor.CompletionProposal.Colors;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorCompletionProposalColors = class(TPersistent)

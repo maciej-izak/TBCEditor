@@ -3,7 +3,7 @@ unit BCEditor.Print.HeaderFooter;
 interface
 
 uses
-  Windows, Classes, SysUtils, Graphics, BCEditor.Print.Types, BCEditor.Print.Margins,
+  Winapi.Windows, System.Classes, System.SysUtils, Vcl.Graphics, BCEditor.Print.Types, BCEditor.Print.Margins,
   BCEditor.Utils;
 
 type
@@ -104,7 +104,7 @@ type
 implementation
 
 uses
-  Math, UITypes, BCEditor.Consts;
+  System.Math, System.UITypes, BCEditor.Consts;
 
 { TBCEditorSectionItem }
 
@@ -602,7 +602,7 @@ begin
       end;
     end;
     LOldAlign := SetTextAlign(ACanvas.Handle, TA_BASELINE);
-    Windows.ExtTextOut(ACanvas.Handle, X, Y + TBCEditorLineInfo(FLineInfo[LCurrentLine - 1]).MaxBaseDistance, 0, nil, PChar(S),
+    Winapi.Windows.ExtTextOut(ACanvas.Handle, X, Y + TBCEditorLineInfo(FLineInfo[LCurrentLine - 1]).MaxBaseDistance, 0, nil, PChar(S),
       Length(S), nil);
     SetTextAlign(ACanvas.Handle, LOldAlign);
   end;

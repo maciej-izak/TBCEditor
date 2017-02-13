@@ -3,7 +3,7 @@ unit BCEditor.Editor.Search.Map.Colors;
 interface
 
 uses
-  Classes, Graphics, BCEditor.Consts, BCEditor.Types;
+  System.Classes, Vcl.Graphics, BCEditor.Consts, BCEditor.Types;
 
 type
   TBCEditorSearchMapColors = class(TPersistent)

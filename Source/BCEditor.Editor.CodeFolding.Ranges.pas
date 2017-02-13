@@ -3,7 +3,7 @@ unit BCEditor.Editor.CodeFolding.Ranges;
 interface
 
 uses
-  Windows, Classes, SysUtils, BCEditor.Editor.CodeFolding.Regions;
+  Winapi.Windows, System.Classes, System.SysUtils, BCEditor.Editor.CodeFolding.Regions;
 
 type
   TBCEditorCodeFoldingRange = class;

@@ -3,7 +3,7 @@ unit BCEditor.Editor.Marks;
 interface
 
 uses
-  Controls, Classes, Contnrs, Graphics, BCEditor.Consts;
+  Vcl.Controls, System.Classes, System.Contnrs, Vcl.Graphics, BCEditor.Consts;
 
 type
   TBCEditorMark = class
@@ -57,7 +57,7 @@ function CompareLines(Item1, Item2: Pointer): Integer;
 implementation
 
 uses
-  BCEditor.Editor.Base, Types;
+  BCEditor.Editor.Base, System.Types;
 
 function CompareLines(Item1, Item2: Pointer): Integer;
 begin

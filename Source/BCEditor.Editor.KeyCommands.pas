@@ -3,7 +3,7 @@ unit BCEditor.Editor.KeyCommands;
 interface
 
 uses
-  Classes, SysUtils, Menus;
+  System.Classes, System.SysUtils, Vcl.Menus;
 
 const
   ecNone = 0;
@@ -216,7 +216,7 @@ function EditorCommandToIdent(ACommand: LongInt; var AIdent: string): Boolean;
 implementation
 
 uses
-  Windows, BCEditor.Language;
+  Winapi.Windows, BCEditor.Language;
 
 type
   TBCEditorCommandString = record
@@ -428,7 +428,7 @@ end;
 
 function TBCEditorKeyCommand.GetShortCut: TShortCut;
 begin
-  Result := Menus.ShortCut(Key, ShiftState);
+  Result := Vcl.Menus.ShortCut(Key, ShiftState);
 end;
 
 procedure TBCEditorKeyCommand.SetCommand(const AValue: TBCEditorCommand);
@@ -462,7 +462,7 @@ begin
       raise EBCEditorKeyCommandException.Create(SBCEditorDuplicateShortcut);
   end;
 
-  Menus.ShortCutToKey(AValue, LNewKey, LNewShiftState);
+  Vcl.Menus.ShortCutToKey(AValue, LNewKey, LNewShiftState);
 
   if (LNewKey <> Key) or (LNewShiftState <> ShiftState) then
   begin
@@ -496,7 +496,7 @@ begin
       raise EBCEditorKeyCommandException.Create(SBCEditOrduplicateShortcut);
   end;
 
-  Menus.ShortCutToKey(AValue, LNewKey, LNewShiftState);
+  Vcl.Menus.ShortCutToKey(AValue, LNewKey, LNewShiftState);
   if (LNewKey <> SecondaryKey) or (LNewShiftState <> SecondaryShiftState) then
   begin
     SecondaryKey := LNewKey;
@@ -506,7 +506,7 @@ end;
 
 function TBCEditorKeyCommand.GetSecondaryShortCut: TShortCut;
 begin
-  Result := Menus.ShortCut(SecondaryKey, SecondaryShiftState);
+  Result := Vcl.Menus.ShortCut(SecondaryKey, SecondaryShiftState);
 end;
 
 { TBCEditorKeyCommands }

@@ -3,7 +3,7 @@ unit BCEditor.Editor.Scroll.Shadow;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorScrollShadow = class(TPersistent)

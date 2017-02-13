@@ -3,8 +3,8 @@ unit BCEditor.Types;
 interface
 
 uses
-  Windows, Classes, Forms, Graphics, Controls, BCEditor.Highlighter.Attributes,
-  BCEditor.Consts, SysUtils, BCEditor.Editor.CompletionProposal.Columns;
+  Winapi.Windows, System.Classes, Vcl.Forms, Vcl.Graphics, Vcl.Controls, BCEditor.Highlighter.Attributes,
+  BCEditor.Consts, System.SysUtils, BCEditor.Editor.CompletionProposal.Columns;
 
 type
   TBCEditorArrayOfString = array of string;
@@ -14,7 +14,8 @@ type
 
   TBCEditorCaretStyle = (csVerticalLine, csThinVerticalLine, csHorizontalLine, csThinHorizontalLine, csHalfBlock, csBlock);
 
-  TBCEditorCompletionProposalEvent = procedure(Sender: TObject; AColumns: TBCEditorCompletionProposalColumns; const AInput: string; const AKey: Word; const AShift: TShiftState) of object;
+  TBCEditorCompletionProposalEvent = procedure(Sender: TObject; AColumns: TBCEditorCompletionProposalColumns;
+    const AInput: string; const AKey: Word; const AShift: TShiftState; var ACanExecute: Boolean) of object;
   TBCEditorCompletionProposalSelectedEvent = procedure(Sender: TObject; var ASelectedItem: string) of object;
   TBCEditorCompletionProposalValidateEvent = procedure(ASender: TObject; Shift: TShiftState; EndToken: Char) of object;
 
@@ -114,6 +115,11 @@ type
   );
   TBCEditorSearchChangeEvent = procedure(Event: TBCEditorSearchChanges) of object;
 
+  TBCEditorReplaceChanges = (
+    rcEngineUpdate
+  );
+  TBCEditorReplaceChangeEvent = procedure(Event: TBCEditorReplaceChanges) of object;
+
   TBCEditorSearchOption = (
     soBeepIfStringNotFound,
     soCaseSensitive,
@@ -167,6 +173,7 @@ type
     cpoFiltered,
     cpoParseItemsFromText,
     cpoResizeable,
+    cpoShowShadow,
     cpoUseHighlighterColumnFont
   );
   TBCEditorCompletionProposalOptions = set of TBCEditorCompletionProposalOption;

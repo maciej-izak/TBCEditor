@@ -3,7 +3,7 @@ unit BCEditor.Editor.Caret.Offsets;
 interface
 
 uses
-  Classes;
+  System.Classes;
 
 type
   TBCEditorCaretOffsets = class(TPersistent)

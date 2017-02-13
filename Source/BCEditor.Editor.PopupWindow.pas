@@ -3,8 +3,8 @@ unit BCEditor.Editor.PopupWindow;
 interface
 
 uses
-  Messages, Classes, Types, Controls{$if defined(USE_ALPHASKINS)}, sCommonData, acSBUtils,
-  sStyleSimply{$ifend};
+  Winapi.Messages, System.Classes, System.Types, Vcl.Controls{$if defined(USE_ALPHASKINS)}, sCommonData, acSBUtils,
+  sStyleSimply{$endif};
 
 type
   TBCEditorPopupWindow = class(TCustomControl)
@@ -12,14 +12,14 @@ type
 {$if defined(USE_ALPHASKINS)}
     FCommonData: TsScrollWndData;
     FScrollWnd: TacScrollWnd;
-{$ifend}
+{$endif}
     FOriginalHeight: Integer;
     FOriginalWidth: Integer;
     procedure WMEraseBkgnd(var AMessage: TMessage); message WM_ERASEBKGND;
     procedure WMMouseActivate(var AMessage: TWMMouseActivate); message WM_MOUSEACTIVATE;
 {$if defined(USE_VCL_STYLES)}
     procedure WMNCPaint(var AMessage: TWMNCPaint); message WM_NCPAINT;
-{$ifend}
+{$endif}
   protected
     FActiveControl: TWinControl;
     procedure CreateParams(var Params: TCreateParams); override;
@@ -35,14 +35,14 @@ type
     property ActiveControl: TWinControl read FActiveControl;
 {$if defined(USE_ALPHASKINS)}
     property SkinData: TsScrollWndData read FCommonData write FCommonData;
-{$ifend}
+{$endif}
   end;
 
 implementation
 
 uses
-  Windows, SysUtils{$if defined(USE_VCL_STYLES)}, Themes{$ifend}
-  {$if defined(USE_ALPHASKINS)}, CommCtrl, sVCLUtils, sMessages, sConst, sSkinProps{$ifend};
+  Winapi.Windows, System.SysUtils{$if defined(USE_VCL_STYLES)}, Vcl.Themes{$endif}
+  {$if defined(USE_ALPHASKINS)}, Winapi.CommCtrl, sVCLUtils, sMessages, sConst, sSkinProps{$endif};
 
 constructor TBCEditorPopupWindow.Create(AOwner: TComponent);
 begin
@@ -51,7 +51,7 @@ begin
   FCommonData.COC := COC_TsListBox;
   if FCommonData.SkinSection = '' then
     FCommonData.SkinSection := s_Edit;
-{$ifend}
+{$endif}
   inherited Create(AOwner);
 
   ControlStyle := ControlStyle + [csNoDesignVisible, csReplicatable];
@@ -71,14 +71,14 @@ begin
     FreeAndNil(FScrollWnd);
   if Assigned(FCommonData) then
     FreeAndNil(FCommonData);
-  {$ifend}
+  {$endif}
 end;
 
 procedure TBCEditorPopupWindow.CreateWnd;
 {$if defined(USE_ALPHASKINS)}
 var
   LSkinParams: TacSkinParams;
-{$ifend}
+{$endif}
 begin
   inherited;
 {$if defined(USE_ALPHASKINS)}
@@ -88,7 +88,7 @@ begin
 
   if FScrollWnd = nil then
     FScrollWnd := TacEditWnd.Create(Handle, SkinData, SkinData.SkinManager, LSkinParams, False);
-{$ifend}
+{$endif}
 end;
 
 procedure TBCEditorPopupWindow.SetOriginalSize;
@@ -181,7 +181,7 @@ begin
   if StyleServices.Enabled then
     StyleServices.PaintBorder(Self, False);
 end;
-{$ifend}
+{$endif}
 
 procedure TBCEditorPopupWindow.WndProc(var AMessage: TMessage);
 begin
@@ -208,7 +208,7 @@ begin
           Exit;
         end;
     end;
-{$ifend}
+{$endif}
   inherited;
 end;
 

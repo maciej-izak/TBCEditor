@@ -3,7 +3,7 @@ unit BCEditor.Highlighter.Colors;
 interface
 
 uses
-  Classes, Graphics, BCEditor.Highlighter.Info;
+  System.Classes, Vcl.Graphics, BCEditor.Highlighter.Info;
 
 type
   TBCEditorHighlighterElement = record
@@ -38,7 +38,7 @@ type
 implementation
 
 uses
-  SysUtils, BCEditor.Editor.Base, BCEditor.Highlighter, BCEditor.Highlighter.Import.JSON, IOUtils;
+  System.SysUtils, BCEditor.Editor.Base, BCEditor.Highlighter, BCEditor.Highlighter.Import.JSON, System.IOUtils;
 
 constructor TBCEditorHighlighterColors.Create(AOwner: TObject);
 begin

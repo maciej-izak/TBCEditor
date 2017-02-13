@@ -3,7 +3,7 @@ unit BCEditor.Consts;
 interface
 
 uses
-  Graphics;
+  Vcl.Graphics;
 
 type
   TBCEditorCharSet = set of AnsiChar;

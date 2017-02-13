@@ -3,7 +3,7 @@ unit BCEditor.Editor.LeftMargin.Colors;
 interface
 
 uses
-  Classes, Graphics, BCEditor.Consts;
+  System.Classes, Vcl.Graphics, BCEditor.Consts;
 
 type
   TBCEditorLeftMarginColors = class(TPersistent)

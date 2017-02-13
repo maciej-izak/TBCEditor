@@ -11,7 +11,7 @@ unit BCEditor.Editor.TokenInfo.PopupWindow;
 interface
 
 uses
-  Classes, Types, Graphics, BCEditor.Types, BCEditor.Lines, BCEditor.Editor.PopupWindow,
+  System.Classes, System.Types, Vcl.Graphics, BCEditor.Types, BCEditor.Lines, BCEditor.Editor.PopupWindow,
   BCEditor.Editor.TokenInfo;
 
 type
@@ -23,7 +23,7 @@ type
 
   TBCEditorTokenInfoPopupWindow = class(TBCEditorPopupWindow)
   strict private
-    FBitmapBuffer: Graphics.TBitmap;
+    FBitmapBuffer: Vcl.Graphics.TBitmap;
     FContent: TBCEditorLines;
     FContentTextTokensList: TList;
     FMaxHeight: Integer;
@@ -48,9 +48,7 @@ type
 implementation
 
 uses
-  Windows, BCEditor.Consts, BCEditor.Utils, UITypes;
-
-{$I BCEditor.RectHelper.inc}
+  Winapi.Windows, BCEditor.Consts, BCEditor.Utils, System.UITypes;
 
 const
   MARGIN_LEFT = 3;
@@ -78,7 +76,7 @@ begin
   FTitleContent.Clear;
   FTitleContentTextTokensList := TList.Create;
 
-  FBitmapBuffer := Graphics.TBitmap.Create;
+  FBitmapBuffer := Vcl.Graphics.TBitmap.Create;
 end;
 
 destructor TBCEditorTokenInfoPopupWindow.Destroy;
@@ -193,7 +191,7 @@ begin
       LPTextToken := PBCEditorTokenInfoTextToken(FTitleContentTextTokensList[FTitleContentTextTokensList.Count - 1]);
       LRect.Height := LPTextToken^.Rect.Bottom;
 
-      Windows.ExtTextOut(Canvas.Handle, 0, 0, ETO_OPAQUE, LRect, '', 0, nil);
+      Winapi.Windows.ExtTextOut(Canvas.Handle, 0, 0, ETO_OPAQUE, LRect, '', 0, nil);
 
       LPTextToken := PBCEditorTokenInfoTextToken(FTitleContentTextTokensList[0]);
       LPreviousStyles := LPTextToken^.Styles;
