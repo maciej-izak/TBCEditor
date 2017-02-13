@@ -3,7 +3,7 @@ unit BCEditor.Editor.Directories;
 interface
 
 uses
-  Classes;
+  System.Classes;
 
 type
   TBCEditorDirectories = class(TPersistent)

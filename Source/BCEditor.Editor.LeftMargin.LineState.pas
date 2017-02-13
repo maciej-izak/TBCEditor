@@ -3,7 +3,7 @@ unit BCEditor.Editor.LeftMargin.LineState;
 interface
 
 uses
-  Classes;
+  System.Classes;
 
 type
   TBCEditorLeftMarginLineState = class(TPersistent)

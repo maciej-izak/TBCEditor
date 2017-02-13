@@ -3,7 +3,7 @@ unit BCEditor.Search;
 interface
 
 uses
-  Classes, BCEditor.Lines;
+  System.Classes, BCEditor.Lines;
 
 type
   TBCEditorSearchBase = class

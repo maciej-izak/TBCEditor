@@ -3,7 +3,7 @@ unit BCEditor.Editor.SpecialChars;
 interface
 
 uses
-  Classes, Graphics, BCEditor.Editor.SpecialChars.Selection, BCEditor.Editor.SpecialChars.EndOfLine,
+  System.Classes, Vcl.Graphics, BCEditor.Editor.SpecialChars.Selection, BCEditor.Editor.SpecialChars.EndOfLine,
   BCEditor.Types;
 
 type

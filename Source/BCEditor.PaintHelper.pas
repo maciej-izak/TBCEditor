@@ -3,7 +3,7 @@ unit BCEditor.PaintHelper;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Math, Types, UITypes,
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, System.Math, System.Types, System.UITypes,
   BCEditor.Types;
 
 const
@@ -105,7 +105,7 @@ type
     FFontStock: TBCEditorFontStock;
     FHandle: HDC;
     FSaveHandle: Integer;
-    FStockBitmap: Graphics.TBitmap;
+    FStockBitmap: Vcl.Graphics.TBitmap;
   protected
     property DrawingCount: Integer read FDrawingCount;
   public
@@ -125,7 +125,7 @@ type
     property Color: TColor read FColor;
     property FixedSizeFont: Boolean read FFixedSizeFont;
     property FontStock: TBCEditorFontStock read FFontStock;
-    property StockBitmap: Graphics.TBitmap read FStockBitmap;
+    property StockBitmap: Vcl.Graphics.TBitmap read FStockBitmap;
   end;
 
   EBCEditorPaintHelperException = class(Exception);
@@ -133,7 +133,7 @@ type
 implementation
 
 uses
-  BCEditor.Utils, BCEditor.Consts, BCEditor.Language, Character;
+  BCEditor.Utils, BCEditor.Consts, BCEditor.Language, System.Character;
 
 var
   GFontsInfoManager: TBCEditorFontsInfoManager;
@@ -495,7 +495,7 @@ begin
   inherited Create;
 
   FFontStock := TBCEditorFontStock.Create(ABaseFont);
-  FStockBitmap := Graphics.TBitmap.Create;
+  FStockBitmap := Vcl.Graphics.TBitmap.Create;
   FStockBitmap.Canvas.Brush.Color := clWhite;
   FCalcExtentBaseStyle := ACalcExtentBaseStyle;
   SetBaseFont(ABaseFont);
@@ -521,8 +521,8 @@ begin
     FHandle := AHandle;
     FSaveHandle := SaveDC(AHandle);
     SelectObject(AHandle, FCurrentFont);
-    Windows.SetTextColor(AHandle, ColorToRGB(FColor));
-    Windows.SetBkColor(AHandle, ColorToRGB(FBackgroundColor));
+    Winapi.Windows.SetTextColor(AHandle, ColorToRGB(FColor));
+    Winapi.Windows.SetBkColor(AHandle, ColorToRGB(FBackgroundColor));
   end;
   Inc(FDrawingCount);
 end;
@@ -604,7 +604,7 @@ begin
   begin
     FBackgroundColor := AValue;
     if FHandle <> 0 then
-      Windows.SetBkColor(FHandle, ColorToRGB(AValue));
+      Winapi.Windows.SetBkColor(FHandle, ColorToRGB(AValue));
   end;
 end;
 

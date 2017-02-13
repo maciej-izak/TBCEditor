@@ -3,7 +3,7 @@ unit BCEditor.Editor.Caret.MultiEdit.Colors;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorCaretMultiEditColors = class(TPersistent)

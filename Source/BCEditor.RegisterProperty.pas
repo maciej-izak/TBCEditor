@@ -3,14 +3,14 @@ unit BCEditor.RegisterProperty;
 interface
 
 uses
-  DesignIntf, DesignEditors, VCLEditors, StrEdit, Classes;
+  DesignIntf, DesignEditors, VCLEditors, StrEdit, System.Classes;
 
 procedure Register;
 
 implementation
 
 uses
-  Controls, BCEditor.Editor, BCEditor.MacroRecorder, SysUtils;
+  Vcl.Controls, BCEditor.Editor, BCEditor.MacroRecorder, System.SysUtils;
 
 { Register }
 

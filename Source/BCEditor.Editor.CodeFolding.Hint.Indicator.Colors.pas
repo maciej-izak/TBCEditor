@@ -3,7 +3,7 @@ unit BCEditor.Editor.CodeFolding.Hint.Indicator.Colors;
 interface
 
 uses
-  Classes, Graphics, BCEditor.Consts;
+  System.Classes, Vcl.Graphics, BCEditor.Consts;
 
 type
   TBCEditorCodeFoldingHintIndicatorColors = class(TPersistent)

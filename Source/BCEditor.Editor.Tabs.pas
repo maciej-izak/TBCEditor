@@ -3,7 +3,7 @@ unit BCEditor.Editor.Tabs;
 interface
 
 uses
-  Classes, BCEditor.Types;
+  System.Classes, BCEditor.Types;
 
 const
   BCEDITOR_DEFAULT_TAB_OPTIONS = [toColumns, toSelectedBlockIndent];

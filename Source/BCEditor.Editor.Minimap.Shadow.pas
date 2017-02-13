@@ -3,7 +3,7 @@ unit BCEditor.Editor.Minimap.Shadow;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorMinimapShadow = class(TPersistent)

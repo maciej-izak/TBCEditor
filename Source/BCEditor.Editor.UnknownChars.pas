@@ -3,7 +3,7 @@ unit BCEditor.Editor.UnknownChars;
 interface
 
 uses
-  Classes;
+  System.Classes;
 
 type
   TBCEditorUnknownChars = class(TPersistent)

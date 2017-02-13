@@ -3,20 +3,20 @@ unit BCEditor.Editor.CompletionProposal.PopupWindow;
 interface
 
 uses
-  Messages, Classes, Types, Forms, Controls, Graphics, BCEditor.Utils,
+  Winapi.Messages, System.Classes, System.Types, Vcl.Forms, Vcl.Controls, Vcl.Graphics, BCEditor.Utils,
   BCEditor.Types, BCEditor.Editor.CompletionProposal.Columns.Items, BCEditor.Editor.PopupWindow,
   BCEditor.Editor.CompletionProposal;
 
 {$if defined(USE_VCL_STYLES)}
 const
-  CM_UPDATE_VCLSTYLE_SCROLLBARS= CM_BASE + 2050;
-{$ifend}
+  CM_UPDATE_VCLSTYLE_SCROLLBARS = CM_BASE + 2050;
+{$endif}
 
 type
   TBCEditorCompletionProposalPopupWindow = class(TBCEditorPopupWindow)
   strict private
     FAdjustCompletionStart: Boolean;
-    FBitmapBuffer: Graphics.TBitmap;
+    FBitmapBuffer: Vcl.Graphics.TBitmap;
     FCanFree: Boolean;
     FCaseSensitive: Boolean;
     FCompletionProposal: TBCEditorCompletionProposal;
@@ -74,11 +74,9 @@ type
 implementation
 
 uses
-  Windows, SysUtils, UITypes, BCEditor.Editor.Base, BCEditor.Editor.KeyCommands,
-  BCEditor.Editor.Utils, BCEditor.Consts, Math, Dialogs, BCEditor.Editor.CompletionProposal.Columns
-  {$if defined(USE_VCL_STYLES) or not defined(USE_VCL_STYLES) and not defined(USE_ALPHASKINS)}, Themes{$ifend};
-
-{$I BCEditor.RectHelper.inc}
+  Winapi.Windows, System.SysUtils, System.UITypes, BCEditor.Editor.Base, BCEditor.Editor.KeyCommands,
+  BCEditor.Editor.Utils, BCEditor.Consts, System.Math, Vcl.Dialogs, BCEditor.Editor.CompletionProposal.Columns
+  {$if defined(USE_VCL_STYLES) or not defined(USE_VCL_STYLES) and not defined(USE_ALPHASKINS)}, Vcl.Themes{$endif};
 
 constructor TBCEditorCompletionProposalPopupWindow.Create(AOwner: TComponent);
 begin
@@ -95,7 +93,7 @@ begin
   AddKeyHandlers;
 
   FItems := TStringList.Create;
-  FBitmapBuffer := Graphics.TBitmap.Create;
+  FBitmapBuffer := Vcl.Graphics.TBitmap.Create;
 
   FOnValidate := HandleOnValidate;
   OnDblClick := HandleDblClick;
@@ -103,7 +101,8 @@ end;
 
 destructor TBCEditorCompletionProposalPopupWindow.Destroy;
 begin
-  FCompletionProposal.VisibleLines := ClientHeight div FItemHeight;
+  if FItemHeight <> 0 then
+    FCompletionProposal.VisibleLines := ClientHeight div FItemHeight;
   FCompletionProposal.Width := Width;
 
   FCanFree := False;
@@ -350,7 +349,7 @@ begin
         Canvas.Brush.Color := LColumn.Title.Colors.Background;
         LRect.Left := LColumnWidth;
         LRect.Right := LColumnWidth + LColumn.Width;
-        Windows.ExtTextOut(Canvas.Handle, 0, 0, ETO_OPAQUE, LRect, '', 0, nil);
+        Winapi.Windows.ExtTextOut(Canvas.Handle, 0, 0, ETO_OPAQUE, LRect, '', 0, nil);
         Canvas.Font.Assign(LColumn.Title.Font);
         if LColumn.Title.Visible then
           Canvas.TextOut(FMargin + LColumnWidth, 0, LColumn.Title.Caption);
@@ -632,6 +631,8 @@ begin
     CurrentString := ACurrentString;
     if Length(FItemIndexArray) > 0 then
     begin
+      if cpoShowShadow in FCompletionProposal.Options then
+        ActivateDropShadow(Handle);
       UpdateScrollBar;
       Show(LPoint);
     end;
@@ -778,7 +779,7 @@ begin
 
 {$if defined(USE_VCL_STYLES)}
   Perform(CM_UPDATE_VCLSTYLE_SCROLLBARS, 0, 0);
-{$ifend}
+{$endif}
 end;
 
 procedure TBCEditorCompletionProposalPopupWindow.WMVScroll(var AMessage: TWMScroll);

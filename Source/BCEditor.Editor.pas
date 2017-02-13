@@ -116,7 +116,7 @@ type
     property ShowHint;
     {$if defined(USE_ALPHASKINS)}
     property SkinData;
-    {$ifend}
+    {$endif}
     property SpecialChars;
     property SyncEdit;
     property TabOrder;
@@ -136,7 +136,7 @@ type
 implementation
 
 uses
-  Windows, Classes, SysUtils;
+  Winapi.Windows, System.Classes, System.SysUtils;
 
 procedure TBCCustomEditor.DoOnProcessCommand(var Command: TBCEditorCommand; var AChar: Char; Data: Pointer);
 begin

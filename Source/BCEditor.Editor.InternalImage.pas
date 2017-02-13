@@ -3,16 +3,16 @@ unit BCEditor.Editor.InternalImage;
 interface
 
 uses
-  Graphics;
+  Vcl.Graphics;
 
 type
   TBCEditorInternalImage = class(TObject)
   strict private
     FCount: Integer;
     FHeight: Integer;
-    FImages: Graphics.TBitmap;
+    FImages: Vcl.Graphics.TBitmap;
     FWidth: Integer;
-    function CreateBitmapFromInternalList(AModule: THandle; const AName: string): Graphics.TBitmap;
+    function CreateBitmapFromInternalList(AModule: THandle; const AName: string): Vcl.Graphics.TBitmap;
     procedure FreeBitmapFromInternalList;
   public
     constructor Create(AModule: THandle; const AName: string; const ACount: Integer = 1);
@@ -25,14 +25,14 @@ type
 implementation
 
 uses
-  Windows, Classes, Types, SysUtils;
+  Winapi.Windows, System.Classes, System.Types, System.SysUtils;
 
 type
   TInternalResource = class(TObject)
   public
     UsageCount: Integer;
     Name: string;
-    Bitmap: Graphics.TBitmap;
+    Bitmap: Vcl.Graphics.TBitmap;
   end;
 
 var
@@ -55,7 +55,7 @@ begin
   inherited Destroy;
 end;
 
-function TBCEditorInternalImage.CreateBitmapFromInternalList(AModule: THandle; const AName: string): Graphics.TBitmap;
+function TBCEditorInternalImage.CreateBitmapFromInternalList(AModule: THandle; const AName: string): Vcl.Graphics.TBitmap;
 var
   LIndex: Integer;
   LInternalResource: TInternalResource;
@@ -72,7 +72,7 @@ begin
     end;
   end;
 
-  Result := Graphics.TBitmap.Create;
+  Result := Vcl.Graphics.TBitmap.Create;
   Result.Handle := LoadBitmap(AModule, PChar(AName));
 
   LInternalResource := TInternalResource.Create;

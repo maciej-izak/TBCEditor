@@ -3,7 +3,7 @@ unit BCEditor.Editor.LeftMargin.MarksPanel;
 interface
 
 uses
-  Classes, Graphics, BCEditor.Types;
+  System.Classes, Vcl.Graphics, BCEditor.Types;
 
 type
   TBCEditorLeftMarginMarksPanel = class(TPersistent)
@@ -28,7 +28,7 @@ type
 implementation
 
 uses
-  Math;
+  System.Math;
 
 constructor TBCEditorLeftMarginMarksPanel.Create;
 begin

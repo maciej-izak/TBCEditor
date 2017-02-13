@@ -3,7 +3,7 @@ unit BCEditor.Search.Wildcard;
 interface
 
 uses
-  Classes, BCEditor.Search.RegularExpressions;
+  System.Classes, BCEditor.Search.RegularExpressions;
 
 type
   TBCEditorWildcardSearch = class(TBCEditorRegexSearch)

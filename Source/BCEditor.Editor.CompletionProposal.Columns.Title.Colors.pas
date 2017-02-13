@@ -3,7 +3,7 @@ unit BCEditor.Editor.CompletionProposal.Columns.Title.Colors;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorCompletionProposalColumnTitleColors = class(TPersistent)

@@ -3,8 +3,9 @@ unit BCEditor.Utils;
 interface
 
 uses
-  Windows, Math, Classes, Graphics, UITypes, BCEditor.Consts, BCEditor.Types;
+  Winapi.Windows, System.Math, System.Classes, Vcl.Graphics, System.UITypes, BCEditor.Consts, BCEditor.Types;
 
+function ActivateDropShadow(const AHandle: THandle): Boolean;
 function CaseNone(const AChar: Char): Char;
 function CaseStringNone(const AString: string): string;
 function CaseUpper(const AChar: Char): Char;
@@ -14,7 +15,7 @@ function IsCombiningDiacriticalMark(const AChar: Char): Boolean;
 function DeleteWhitespace(const AText: string): string;
 function MessageDialog(const AMessage: string; ADlgType: TMsgDlgType; AButtons: TMsgDlgButtons): Integer;
 function MiddleColor(AColor1, AColor2: TColor): TColor;
-function MinMax(AValue, AMinValue, AMaxValue: Integer): Integer;
+function MinMax(const AValue, AMinValue, AMaxValue: Integer): Integer;
 function TextWidth(ACanvas: TCanvas; const AText: string): Integer;
 function TextHeight(ACanvas: TCanvas; const AText: string): Integer;
 procedure ClearList(var AList: TList);
@@ -23,7 +24,36 @@ procedure FreeList(var AList: TList);
 implementation
 
 uses
-  Forms, Dialogs, SysUtils, Character, StrUtils;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.SysUtils, System.Character;
+
+function ActivateDropShadow(const AHandle: THandle): Boolean;
+
+  function IsXP: Boolean;
+  begin
+    Result := (Win32Platform = VER_PLATFORM_WIN32_NT) and
+      CheckWin32Version(5, 1);
+  end;
+
+const
+  SPI_SETDROPSHADOW = $1025;
+  CS_DROPSHADOW = $00020000;
+
+var
+  NewLong: Cardinal;
+  B: Boolean;
+begin
+  B := True;
+  if IsXP and SystemParametersInfo(SPI_SETDROPSHADOW, 0, @B, 0) then
+  begin
+    NewLong := GetClassLong(AHandle, GCL_STYLE);
+    NewLong := NewLong or CS_DROPSHADOW;
+
+    Result := SetClassLong(AHandle, GCL_STYLE, NewLong) <> 0;
+    if Result then
+      SendMessage(AHandle, CM_RECREATEWND, 0, 0);
+  end else
+    Result := False;
+end;
 
 function CaseNone(const AChar: Char): Char;
 begin
@@ -59,12 +89,7 @@ begin
   LPosition := 1;
   while True do
   begin
-    {$IF CompilerVersion < 24}
-    LPosition := PosEx(BCEDITOR_TAB_CHAR, Result, LPosition);
-    {$ELSE}
     LPosition := Pos(BCEDITOR_TAB_CHAR, Result, LPosition);
-    {$IFEND}
-
     if LPosition = 0 then
       Break;
 
@@ -144,11 +169,7 @@ begin
   SetLength(Result, Length(AText));
   LIndex2 := 0;
   for LIndex := 1 to Length(AText) do
-  {$IF CompilerVersion < 25}
-    if not IsWhiteSpace(AText[LIndex]) then
-  {$ELSE}
     if not AText[LIndex].IsWhiteSpace then
-  {$IFEND}
     begin
       Inc(LIndex2);
       Result[LIndex2] := AText[LIndex];
@@ -169,10 +190,12 @@ begin
   end;
 end;
 
-function MinMax(AValue, AMinValue, AMaxValue: Integer): Integer;
+function MinMax(const AValue, AMinValue, AMaxValue: Integer): Integer;
+var
+  LValue: Integer;
 begin
-  AValue := Min(AValue, AMaxValue);
-  Result := Max(AValue, AMinValue);
+  LValue := Min(AValue, AMaxValue);
+  Result := Max(LValue, AMinValue);
 end;
 
 function GetHasTabs(ALine: PChar; var ACharsBefore: Integer): Boolean;

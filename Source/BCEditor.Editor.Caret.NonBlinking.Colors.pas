@@ -3,7 +3,7 @@ unit BCEditor.Editor.Caret.NonBlinking.Colors;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorCaretNonBlinkingColors = class(TPersistent)

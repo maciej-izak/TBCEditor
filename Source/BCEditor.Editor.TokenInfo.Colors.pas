@@ -3,7 +3,7 @@ unit BCEditor.Editor.TokenInfo.Colors;
 interface
 
 uses
-  Classes, Graphics;
+  System.Classes, Vcl.Graphics;
 
 type
   TBCEditorTokenInfoColors = class(TPersistent)
